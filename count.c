@@ -1,21 +1,20 @@
-// Счетчик похожих строк
 #include <stdio.h>
 #include <stdlib.h>
 
 int count(int M, int N, int A[M][N])
 {
-    int size_first, size_next, // размеры множеств
-                               // size_first - первая строка
-                               // size_next - следующая строка
-        c = 0, // количество похожих строк
+    int size_first, size_next, // СЂР°Р·РјРµСЂС‹ РјРЅРѕР¶РµСЃС‚РІ
+                               // size_first - РїРµСЂРІР°СЏ СЃС‚СЂРѕРєР°
+                               // size_next - СЃР»РµРґСѓСЋС‰Р°СЏ СЃС‚СЂРѕРєР°
+        c = 0, // РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕС…РѕР¶РёС… СЃС‚СЂРѕРє
         j;
 
-    int* arr_first = NULL; // указатель первой строки
-    int* arr_next = NULL; // указатель следующих строк
+    int* arr_first = NULL; // СѓРєР°Р·Р°С‚РµР»СЊ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё
+    int* arr_next = NULL; // СѓРєР°Р·Р°С‚РµР»СЊ СЃР»РµРґСѓСЋС‰РёС… СЃС‚СЂРѕРє
 
-    arr_first = sort(&size_first, N, A[0]); // множество элементов первой строки
+    arr_first = sort(&size_first, N, A[0]); // РјРЅРѕР¶РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё
 
-    printf("\n\tУпорядоченные строки:\n"
+    printf("\n\tРЈРїРѕСЂСЏРґРѕС‡РµРЅРЅС‹Рµ СЃС‚СЂРѕРєРё:\n"
            "\t1: ");
 
     for (int i = 0; i < size_first; i++)
@@ -23,25 +22,25 @@ int count(int M, int N, int A[M][N])
 
     for (int i = 1; i < M; i++)
     {
-        arr_next = sort(&size_next, N, A[i]); // множество элементов текущей строки
+        arr_next = sort(&size_next, N, A[i]); // РјРЅРѕР¶РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
         printf("\n\t%d: ", i+1);
 
         for (j = 0; j < size_next; j++)
             printf("%d ", arr_next[j]);
 
-        if (size_first == size_next) // если мощности множеств равны
+        if (size_first == size_next) // РµСЃР»Рё РјРѕС‰РЅРѕСЃС‚Рё РјРЅРѕР¶РµСЃС‚РІ СЂР°РІРЅС‹
         {
             for (j = 0; j < size_first; j++)
-                if (arr_first[j] != arr_next[j]) // если элементы множеств не совпали
+                if (arr_first[j] != arr_next[j]) // РµСЃР»Рё СЌР»РµРјРµРЅС‚С‹ РјРЅРѕР¶РµСЃС‚РІ РЅРµ СЃРѕРІРїР°Р»Рё
                     break;
 
-            if (j == size_first) // если все элементы совпали
+            if (j == size_first) // РµСЃР»Рё РІСЃРµ СЌР»РµРјРµРЅС‚С‹ СЃРѕРІРїР°Р»Рё
                 c++;
         }
-        free(arr_next); // освобождение памяти
+        free(arr_next); // РѕСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё
     }
 
-    free(arr_first); // освобождение памяти
+    free(arr_first); // РѕСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё
 
     return c;
 }
